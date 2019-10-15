@@ -1,7 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MeshSupSamp", "MeshSupSamp\MeshSupSamp.vcxproj", "{38D206C0-4C79-45B6-B5C7-7B729B1C519D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PointsDecim", "PointsDecim\PointsDecim.vcxproj", "{48D106C0-4C79-45B6-B5C7-7B729B1C519D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PointsDist", "PointsDist\PointsDist.vcxproj", "{58D506C0-4C79-45B6-B5C7-7B729B1C519D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,8 +25,27 @@ Global
 		{38D206C0-4C79-45B6-B5C7-7B729B1C519D}.Release|Win32.Build.0 = Release|Win32
 		{38D206C0-4C79-45B6-B5C7-7B729B1C519D}.Release|x64.ActiveCfg = Release|x64
 		{38D206C0-4C79-45B6-B5C7-7B729B1C519D}.Release|x64.Build.0 = Release|x64
+		{48D106C0-4C79-45B6-B5C7-7B729B1C519D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{48D106C0-4C79-45B6-B5C7-7B729B1C519D}.Debug|Win32.Build.0 = Debug|Win32
+		{48D106C0-4C79-45B6-B5C7-7B729B1C519D}.Debug|x64.ActiveCfg = Debug|x64
+		{48D106C0-4C79-45B6-B5C7-7B729B1C519D}.Debug|x64.Build.0 = Debug|x64
+		{48D106C0-4C79-45B6-B5C7-7B729B1C519D}.Release|Win32.ActiveCfg = Release|Win32
+		{48D106C0-4C79-45B6-B5C7-7B729B1C519D}.Release|Win32.Build.0 = Release|Win32
+		{48D106C0-4C79-45B6-B5C7-7B729B1C519D}.Release|x64.ActiveCfg = Release|x64
+		{48D106C0-4C79-45B6-B5C7-7B729B1C519D}.Release|x64.Build.0 = Release|x64
+		{58D506C0-4C79-45B6-B5C7-7B729B1C519D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{58D506C0-4C79-45B6-B5C7-7B729B1C519D}.Debug|Win32.Build.0 = Debug|Win32
+		{58D506C0-4C79-45B6-B5C7-7B729B1C519D}.Debug|x64.ActiveCfg = Debug|x64
+		{58D506C0-4C79-45B6-B5C7-7B729B1C519D}.Debug|x64.Build.0 = Debug|x64
+		{58D506C0-4C79-45B6-B5C7-7B729B1C519D}.Release|Win32.ActiveCfg = Release|Win32
+		{58D506C0-4C79-45B6-B5C7-7B729B1C519D}.Release|Win32.Build.0 = Release|Win32
+		{58D506C0-4C79-45B6-B5C7-7B729B1C519D}.Release|x64.ActiveCfg = Release|x64
+		{58D506C0-4C79-45B6-B5C7-7B729B1C519D}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5F7F4EDC-53BD-47EC-982A-9D25B099364C}
 	EndGlobalSection
 EndGlobal

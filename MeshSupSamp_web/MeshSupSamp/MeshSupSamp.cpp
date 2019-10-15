@@ -1,51 +1,11 @@
-#include "Windows.h"
-#include "mex.h"
-#include "matrix.h"
-//#include "LinAlg.h"
+#include <Windows.h>
 #include <vector>
+#include <mex.h>
+#include <matrix.h>
+#include "../vec3.h"
 
 
-class vec3d
-{
-private:
-	double x,y,z;
-
-public:
-
-	vec3d(const double _x, const double _y, const double _z){x=_x; y=_y; z=_z;}
-	vec3d(const vec3d& rhs){x=rhs.x; y=rhs.y; z=rhs.z;}
-	
-	double Norm() const {return sqrt(x*x+y*y+z*z);}
-	vec3d& operator-=(const vec3d& rhs) {x-=rhs.x; y-=rhs.y; z-=rhs.z; return *this;} 
-	vec3d operator-(const vec3d& rhs) const {vec3d ret(*this); ret-=rhs; return ret; } 
-	vec3d Cross(const vec3d& Rhs) const { return vec3d(y*Rhs.z-z*Rhs.y,z*Rhs.x-x*Rhs.z, x*Rhs.y-y*Rhs.x);}
-	vec3d& operator*=(const double& Rhs) {x*=Rhs;y*=Rhs;z*=Rhs; return *this;}
-	vec3d operator*(const double& Rhs) const {vec3d Ret(*this); return Ret*=Rhs;}
-	vec3d& operator+=(const vec3d& Rhs) {x+=Rhs.x;y+=Rhs.y;z+=Rhs.z; return *this;}
-	vec3d operator+(const vec3d& Rhs) const {vec3d Ret(*this); return Ret+=Rhs;}
-
-
-
-	double& operator[](const int i) 
-	{
-		if(i==0) 
-			return x;
-		if(i==1)
-			return y;
-		return z;
-	}  
-
-
-
-};
-
-inline vec3d operator*(const double& Lhs,const vec3d&Rhs ) 
-{
-	return Rhs*Lhs;
-}
-
-
-void SubTri(std::vector<vec3d>& Qs, const vec3d& Q0, const vec3d& Q1, const vec3d& Q2, const double Thresh)
+void SubTri(PointCloud& Qs, const vec3d& Q0, const vec3d& Q1, const vec3d& Q2, const double Thresh)
 {
 	vec3d v1=Q1-Q0;
 	double l1=v1.Norm();
@@ -76,9 +36,6 @@ void SubTri(std::vector<vec3d>& Qs, const vec3d& Q0, const vec3d& Q1, const vec3
 			}
 		}
 	}
-
-
-
 }
 
 
@@ -87,12 +44,12 @@ void mexFunction(int nOut, mxArray *Out[], int nIn, const mxArray *In[])
 	size_t nQ=mxGetN(In[0]);
 	size_t nTri=mxGetN(In[1]);
 	if(mxGetM(In[0])!=3 || mxGetM(In[1])!=3)
-		mexErrMsgTxt("Qm and Tri should have 3 rows, in MeshSupSamp(Qm,Tri,Thresh).") ;
+		mexErrMsgTxt("Qm and Tri should have 3 rows") ;
 
 	double Thresh=*mxGetPr(In[2]);
 
 	double* pQ=mxGetPr(In[0]);
-	std::vector<vec3d> Qs;
+	PointCloud Qs;
 	Qs.reserve(nQ*2);
 	for(size_t cQ=0;cQ<nQ;cQ++)
 	{
@@ -121,7 +78,7 @@ void mexFunction(int nOut, mxArray *Out[], int nIn, const mxArray *In[])
 
 
 	Out[0] = mxCreateDoubleMatrix(3, Qs.size(), mxREAL) ;
-	double* pOut=mxGetPr(Out[0]);
+	double* pOut=mxGetDoubles(Out[0]);
 	for(auto Itt=Qs.begin();Itt!=Qs.end();++Itt)
 	{
 		*pOut=(*Itt)[0];
@@ -131,5 +88,4 @@ void mexFunction(int nOut, mxArray *Out[], int nIn, const mxArray *In[])
 		*pOut=(*Itt)[2];
 		++pOut;
 	}
-
 }

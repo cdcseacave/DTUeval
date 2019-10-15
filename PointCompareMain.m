@@ -4,13 +4,17 @@ function BaseEval=PointCompareMain(cSet,Qdata,dst,dataPath)
 
 tic
 % reduce points 0.2 mm neighbourhood density
-Qdata=reducePts_haa(Qdata,dst);
+disp('Reduce points 0.2 mm neighbourhood density')
+%Qdata=reducePts_haa(Qdata,dst);
+Qdata=PointsDecim(Qdata,dst);
 toc
 
-StlInName=[dataPath '/Points/stl/stl' sprintf('%03d',cSet) '_total.ply'];
-
+tic
+disp('Load STL points')
+StlInName=[dataPath '/Points/stl/stl' sprintf('%03d',cSet) '_total2.ply'];
 StlMesh = plyread(StlInName);  %STL points already reduced 0.2 mm neighbourhood density
 Qstl=[StlMesh.vertex.x StlMesh.vertex.y StlMesh.vertex.z]';
+toc
 
 %Load Mask (ObsMask) and Bounding box (BB) and Resolution (Res)
 Margin=10;
@@ -20,18 +24,13 @@ load(MaskName)
 MaxDist=60;
 disp('Computing Data 2 Stl distances')
 Ddata = MaxDistCP(Qstl,Qdata,BB,MaxDist);
-toc
 
 disp('Computing Stl 2 Data distances')
 Dstl=MaxDistCP(Qdata,Qstl,BB,MaxDist);
-disp('Distances computed')
-toc
 
 %use mask
 %From Get mask - inverted & modified.
-One=ones(1,size(Qdata,2));
-Qv=(Qdata-BB(1,:)'*One)/Res+1;
-Qv=round(Qv);
+Qv=round((Qdata - BB(1,:)')/Res);
 
 Midx1=find(Qv(1,:)>0 & Qv(1,:)<=size(ObsMask,1) & Qv(2,:)>0 & Qv(2,:)<=size(ObsMask,2) & Qv(3,:)>0 & Qv(3,:)<=size(ObsMask,3));
 MidxA=sub2ind(size(ObsMask),Qv(1,Midx1),Qv(2,Midx1),Qv(3,Midx1));

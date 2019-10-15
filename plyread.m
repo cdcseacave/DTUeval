@@ -195,7 +195,7 @@ end
 
 % PLY and MATLAB data types (for fread)
 PlyTypeNames = {'char','uchar','short','ushort','int','uint','float','double', ...
-   'char8','uchar8','short16','ushort16','int32','uint32','float32','double64'};
+   'int8','uint8','short16','ushort16','int32','uint32','float32','double64'};
 MatlabTypeNames = {'schar','uchar','int16','uint16','int32','uint32','single','double'};
 SizeOf = [1,1,2,2,4,4,4,8];	% size in bytes of each type
 
